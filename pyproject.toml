@@ -1,0 +1,27 @@
+[project]
+name = "coursework-2"
+version = "0.1.0"
+description = ""
+authors = [
+    {name = "Roman Ivanov",email = "romanivanov531@gmail.com"}
+]
+requires-python = ">=3.14"
+dependencies = [
+    "requests (>=2.34.2,<3.0.0)",
+    "dotenv (>=0.9.9,<0.10.0)"
+]
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[dependency-groups]
+lint = [
+    "isort (>=9.0.1,<10.0.0)",
+    "mypy (>=2.3.1,<3.0.0)",
+    "flake8 (>=7.3.0,<8.0.0)"
+]
+develop = [
+    "pytest (>=9.1.1,<10.0.0)"
+]
