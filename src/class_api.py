@@ -52,7 +52,7 @@ class BasicAPI(Api):
         data = response.json()
         print(data)
 
-if __name__ == '__main__':
-    api = BasicAPI()
-    coordinates = api.get_coordinates('Армения')
-    api.get_aeroplanes(coordinates)
+# if __name__ == '__main__':
+#     api = BasicAPI()
+#     coordinates = api.get_coordinates('Армения')
+#     api.get_aeroplanes(coordinates)
