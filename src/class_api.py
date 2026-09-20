@@ -8,9 +8,11 @@ class Api(ABC):
     @abstractmethod
     def __init__(self):
         pass
+
     @abstractmethod
     def get_coordinates(self, country: str):
         pass
+
     @abstractmethod
     def get_aeroplanes(self, coordinates: list):
         pass
@@ -33,7 +35,7 @@ class BasicAPI(Api):
             'format' : 'json',
             'limit' : 1
         }
-        response = requests.get(self.openstreetmap_url,headers=headers, params=params)
+        response = requests.get(self.openstreetmap_url, headers=headers, params=params)
         data = response.json()
         coordinates = data[0]['boundingbox']
         return coordinates
@@ -50,9 +52,15 @@ class BasicAPI(Api):
 
         response = requests.get(url=self.opensky_url, params=params)
         data = response.json()
-        print(data)
-
-# if __name__ == '__main__':
-#     api = BasicAPI()
-#     coordinates = api.get_coordinates('Армения')
-#     api.get_aeroplanes(coordinates)
+        planes_list = []
+        for plan in data['states']:
+            plane_dict = ({
+                'unique_id' : plan[0],
+                'registration' : plan[2],
+                'callsign' : plan[1],
+                'velocity' : plan[9],
+                'geo_altitude' : plan[13],
+                'on_ground' : plan[8]
+            })
+            planes_list.append(plane_dict)
+        return planes_list
