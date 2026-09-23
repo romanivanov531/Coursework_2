@@ -1,5 +1,6 @@
 from src.class_api import BasicAPI
 from src.class_planes import Planes
+from src.class_save_data import PlaneSaverJson
 
 
 def main():
@@ -15,6 +16,11 @@ def main():
                            "Оставьте поле пустым, если фильтрация не нужна.\n")
 
     rating = Planes.compare_planes_by_geo_altitude(int(user_top_range), country_filter)
+    save_json = PlaneSaverJson()
+    planes_list = []
+    for plane in rating:
+        planes_list.append(plane.make_json_dict())
+    save_json.add_airplane(planes_list)
     for plane in rating:
         print(plane)
 
