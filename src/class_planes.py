@@ -1,3 +1,6 @@
+import json
+
+
 class Planes:
     """Класс для работы с самолетами"""
     registration: str   # Страна регистрации ВС
@@ -37,7 +40,7 @@ class Planes:
         return rating
 
     @classmethod
-    def compare_planes_by_geo_altitude(cls, user_range, country=None):
+    def compare_planes_by_geo_altitude(cls, user_range, country=None) -> list:
         if country:
             filtered_planes = []
             for plane in Planes.planes_list11:
@@ -54,3 +57,14 @@ class Planes:
                       f'Вот топ {len(cls.planes_list11)}')
             rating = sorted(cls.planes_list11, key=lambda x: x.geo_altitude, reverse=True)
             return rating[0: user_range]
+
+    def make_json_dict(self):
+        json_dict = {
+            "Уникальный ID": str(self.unique_id),
+            "Страна регистрации": str(self.registration),
+            "Позывной рейса": str(self.callsign),
+            "Скорость": str(self.velocity),
+            "Высота": str(self.geo_altitude)
+        }
+        json_string = json.dumps(json_dict)
+        return json_string
